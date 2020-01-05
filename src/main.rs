@@ -1,3 +1,43 @@
+use yew::{html, Component, ComponentLink, Html, ShouldRender};
+
+struct App {
+    clicked: bool,
+}
+
+enum Msg {
+    Click,
+}
+
+impl Component for App {
+    type Message = Msg;
+    type Properties = ();
+
+    fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
+        App { clicked: false }
+    }
+
+    fn update(&mut self, msg: Self::Message) -> ShouldRender {
+        match msg {
+            Msg::Click => {
+                self.clicked = true;
+                true
+            }
+        }
+    }
+
+    fn view(&self) -> Html<Self> {
+        let button_text = if self.clicked {
+            "Clicked!"
+        } else {
+            "Clicked me!"
+        };
+
+        html! {
+            <button onclick=|_| Msg::Click>{ button_text }</button>
+        }
+    }
+}
+
 fn main() {
-    println!("Hello, world!");
+    yew::start_app::<App>();
 }
