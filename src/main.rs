@@ -19,7 +19,7 @@ impl Component for App {
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::Click => {
-                self.clicked = true;
+                self.clicked = !self.clicked;
                 true
             }
         }
@@ -29,7 +29,7 @@ impl Component for App {
         let button_text = if self.clicked {
             "Clicked!"
         } else {
-            "Clicked me!"
+            "Click me!"
         };
 
         html! {
@@ -39,5 +39,6 @@ impl Component for App {
 }
 
 fn main() {
+    // Starts the app and mounts it to the page's <body> tag
     yew::start_app::<App>();
 }
